@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={0x105}
+--s.listed_series={0x105}
 
 --Filter if card addable to hand
 function s.filter(c)
