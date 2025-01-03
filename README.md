@@ -9,8 +9,8 @@ Possible json structure:
 
 ```
 		{
-		"url": "",
-		"repo_name": "Minls Metaphys Custom Pack",
+		"url": "https://github.com/minlkase/Minls-Card-Expansion.git",
+		"repo_name": "Minls-Card-Expansion",
 		"repo_path": "./repositories/customcards",
 		"should_update": true,
 		"should_read": true
