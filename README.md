@@ -17,4 +17,4 @@ Possible json structure:
 		}
 ```
 
-Card IDs: 900000XXX
+Card IDs: 600000XXX
