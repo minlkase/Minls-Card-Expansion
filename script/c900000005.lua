@@ -57,6 +57,19 @@ function s.initial_effect(c)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
 
+	--Special Summon itself
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(id,2))
+	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOGRAVE)
+	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e3:SetProperty(EFFECT_FLAG_DELAY)
+	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCountLimit(1,{id,2})
+	e3:SetCondition(function(e) return e:GetHandler():IsReason(REASON_EFFECT) end)
+	e3:SetTarget(s.sptg)
+	e3:SetOperation(s.spop)
+	c:RegisterEffect(e3)
+
 end
 s.listed_series={0x182}
 function s.selfspcostfilter(c,tp,fc)
@@ -119,5 +132,27 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 and Duel.SendtoHand(g,nil,REASON_EFFECT)>0 and tc:IsRelateToEffect(e) and tc:IsControler(tp) then
 		Duel.SendtoGrave(tc,REASON_EFFECT)
+	end
+end
+
+function s.gyfilter(c)
+	return c:IsSetCard(0x182) and c:IsAbleToGrave() and (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP))
+end
+function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local c=e:GetHandler()
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+		and Duel.IsExistingMatchingCard(s.gyfilter,tp,LOCATION_DECK,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+end
+function s.spop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		local g=Duel.SelectMatchingCard(tp,s.gyfilter,tp,LOCATION_DECK,0,1,1,nil)
+		if #g>0 then
+			Duel.SendtoGrave(g,REASON_EFFECT)
+		end
 	end
 end
