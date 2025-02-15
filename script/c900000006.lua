@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--Fusion Materials: 3+ "Tearlaments" and/or Aqua monsters
 	Fusion.AddProcMix(c,true,true,s.ffilter,s.ffilter,s.ffilter)
-	function s.ffilter():
+	function s.ffilter()
 		return Card.IsSetCard(0x182) or Card.IsRace(RACE_AQUA) end
 
 
