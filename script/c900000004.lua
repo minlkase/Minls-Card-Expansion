@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	
 	You can only use each effect of "Tearlaments Estel" once per turn. 
 	]]--
-	local fusparams = {matfilter=Card.IsAbleToDeck,extrafil=s.extramat,extraop=s.extraop,gc=Fusion.ForcedHandler,extratg=s.extratarget}
+	local fusparams1 = {matfilter=Card.IsAbleToDeck,extrafil=s.extramat,extraop=s.extraop,gc=Fusion.ForcedHandler,extratg=s.extratarget}
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
@@ -24,12 +24,13 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(s.cost)
-	e1:SetTarget(Fusion.SummonEffTG(fusparams))
-	e1:SetOperation(Fusion.SummonEffOP(fusparams))
+	e1:SetTarget(Fusion.SummonEffTG(fusparams1))
+	e1:SetOperation(Fusion.SummonEffOP(fusparams1))
 	--e1:SetTarget(Fusion.SummonEffTG())
 	--e1:SetOperation(Fusion.SummonEffOP())
 	c:RegisterEffect(e1)
 
+	local fusparams = {matfilter=Card.IsAbleToDeck,extrafil=s.extramat,extraop=s.extraop,gc=Fusion.ForcedHandler,extratg=s.extratarget}
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
@@ -44,7 +45,6 @@ function s.initial_effect(c)
 
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local fusparams = {matfilter=Card.IsAbleToDeck,extrafil=s.extramat,extraop=s.extraop,gc=Fusion.ForcedHandler,extratg=s.extratarget}
 	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() and Fusion.SummonEffTG(fusparams)(e,tp,eg,ep,ev,re,r,rp,0) end
 	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
