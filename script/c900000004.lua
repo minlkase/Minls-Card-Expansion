@@ -51,8 +51,7 @@ function s.extramat(e,tp,mg)
 	return Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,LOCATION_GRAVE,0,nil)
 end
 function s.extratarget(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
-	Debug.Message(e:GetHandler())
+	if chk==0 then return e:GetHandler():IsAbleToDeckAsCost() end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,e:GetHandler(),1,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE)
 end
 function s.extraop(e,tc,tp,sg)
