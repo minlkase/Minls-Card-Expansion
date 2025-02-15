@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	
 	--[[
-	You can send this card from your hand to the GY;
+	You can reveal this card in your hand;
 	Fusion Summon 1 Fusion Monster from your Extra Deck,
 	by placing Fusion Materials mentioned on it from your hand,
 	field, and/or GY, including this card from your GY, on the bottom of the Deck in any order.
