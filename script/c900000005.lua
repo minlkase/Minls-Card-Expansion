@@ -36,7 +36,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x182}
 function s.selfspcostfilter(c,tp,fc)
-	return c:IsSetCard(0x182) and c:IsReleasable() and c:ListsCardType(0x40)
+	return c:IsSetCard(0x182) and c:IsReleasable() and c:IsType(TYPE_FUSION)
 		and c:IsCanBeFusionMaterial(fc,MATERIAL_FUSION) and c:IsControler(tp)
 end
 function s.rescon(sg,e,tp,mg)
