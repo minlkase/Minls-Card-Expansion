@@ -117,7 +117,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if #g>0 and SendtoHand(g,nil,REASON_EFFECT)>0 and tc:IsRelateToEffect(e) and tc:IsControler(tp) then
+	if #g>0 and Duel.SendtoHand(g,nil,REASON_EFFECT)>0 and tc:IsRelateToEffect(e) and tc:IsControler(tp) then
 		Duel.SendtoGrave(tc,REASON_EFFECT)
 	end
 end
