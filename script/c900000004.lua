@@ -44,7 +44,8 @@ function s.initial_effect(c)
 
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	local fusparams = {matfilter=Card.IsAbleToDeck,extrafil=s.extramat,extraop=s.extraop,gc=Fusion.ForcedHandler,extratg=s.extratarget}
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() and Fusion.SummonEffTG(fusparams)(e,tp,eg,ep,ev,re,r,rp,0) end
 	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.extramat(e,tp,mg)
