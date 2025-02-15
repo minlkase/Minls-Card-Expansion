@@ -24,10 +24,10 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(s.cost)
-	--e1:SetTarget(Fusion.SummonEffTG(fusparams))
-	--e1:SetOperation(Fusion.SummonEffOP(fusparams))
-	e1:SetTarget(Fusion.SummonEffTG())
-	e1:SetOperation(Fusion.SummonEffOP())
+	e1:SetTarget(Fusion.SummonEffTG(fusparams))
+	e1:SetOperation(Fusion.SummonEffOP(fusparams))
+	--e1:SetTarget(Fusion.SummonEffTG())
+	--e1:SetOperation(Fusion.SummonEffOP())
 	c:RegisterEffect(e1)
 
 	local e2=Effect.CreateEffect(c)
@@ -52,7 +52,7 @@ function s.extramat(e,tp,mg)
 end
 function s.extratarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	--Debug.Message(e:GetHandler())
+	Debug.Message(e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,e:GetHandler(),1,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE)
 end
 function s.extraop(e,tc,tp,sg)
