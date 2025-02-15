@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	]]--
 	c:EnableReviveLimit()
 	--Fusion Materials: 2 "Tearlaments" monster
-	Fusion.AddProcMix(c,true,true,FilterBoolFunctionEx(Card.IsSetCard,0x182),FilterBoolFunctionEx(Card.IsSetCard,0x182))
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x182),aux.FilterBoolFunctionEx(Card.IsSetCard,0x182))
 	c:AddMustFirstBeFusionSummoned()
 
 	local e0=Effect.CreateEffect(c)
