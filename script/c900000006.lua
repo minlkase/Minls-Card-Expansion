@@ -17,9 +17,10 @@ function s.initial_effect(c)
 	]]--
 	c:EnableReviveLimit()
 	--Fusion Materials: 3+ "Tearlaments" and/or Aqua monsters
-	Fusion.AddProcMix(c,true,true,s.ffilter,s.ffilter,s.ffilter)
-	function s.ffilter()
-		return aux.FilterBoolFunctionEx(Card.IsSetCard,0x182) or aux.FilterBoolFunctionEx(Card.IsRace,RACE_AQUA) end
+	Fusion.AddProcMix(c,true,true,
+	aux.FilterBoolFunctionEx(Card.IsSetCard,0x182) or aux.FilterBoolFunctionEx(Card.IsRace,RACE_AQUA),
+	aux.FilterBoolFunctionEx(Card.IsSetCard,0x182) or aux.FilterBoolFunctionEx(Card.IsRace,RACE_AQUA),
+	aux.FilterBoolFunctionEx(Card.IsSetCard,0x182) or aux.FilterBoolFunctionEx(Card.IsRace,RACE_AQUA))
 
 
 	s.listed_series={0x182}
