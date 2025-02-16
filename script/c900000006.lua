@@ -79,7 +79,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	if ct==0 then return end
 	local dc=Duel.GetOperatedGroup():GetFirst()
 	Duel.ConfirmCards(1-tp,dc)
-	if dc:IsMonster() and dc.IsRace(RACE_AQUA) and Duel.IsExistingTarget(nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) then
+	if dc:IsMonster() and dc.IsRace(RACE_AQUA) and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,nil) then
 		Duel.ShuffleHand(tp)
 		local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
