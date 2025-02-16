@@ -122,7 +122,7 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,dc)
 		if c:IsSetCard(0x182) and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,1,nil) then
 			Duel.ShuffleHand(tp)
-			if Duel.SelectYesNo(tp,HINTMSG_TODECK) then
+			if Duel.SelectYesNo(tp,aux.Stringid(id,4)) then
 				local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,1,1,nil)
 				if #g>0 then
 					Duel.SendtoDeck(g,nil,1,REASON_EFFECT)
