@@ -33,7 +33,7 @@ function s.initial_effect(c)
 
 	--Draw 1, Destroy 1 card on the field
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(id,1))
+	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
@@ -58,7 +58,7 @@ function s.initial_effect(c)
 	-- Send to GY
 
 	local e4=Effect.CreateEffect(c)
-	e4:SetDescription(aux.Stringid(id,3))
+	e4:SetDescription(aux.Stringid(id,2))
 	e4:SetCategory(CATEGORY_TOGRAVE)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
@@ -93,7 +93,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(1-tp,dc)
 	if dc:IsMonster() and dc:IsRace(RACE_AQUA) and Duel.IsExistingTarget(nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) then
 		Duel.ShuffleHand(tp)
-		if Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
+		if Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 			Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 			if #g>0 then
@@ -117,9 +117,9 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 		if ct==0 then return end
 		local dc=Duel.GetOperatedGroup():GetFirst()
 		Duel.ConfirmCards(1-tp,dc)
-		if c:IsSetCard(0x182) and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,1,nil) then
+		if dc:IsSetCard(0x182) and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,1,nil) then
 			Duel.ShuffleHand(tp)
-			if Duel.SelectYesNo(tp,aux.Stringid(id,4)) then
+			if Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 				local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,1,1,nil)
 				if #g>0 then
 					Duel.SendtoDeck(g,nil,1,REASON_EFFECT)
