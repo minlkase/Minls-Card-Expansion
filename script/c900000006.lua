@@ -55,6 +55,20 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e3)
 
+	-- Send to GY
+
+	local e4=Effect.CreateEffect(c)
+	e4:SetDescription(aux.Stringid(id,3))
+	e4:SetCategory(CATEGORY_TOGRAVE)
+	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e4:SetProperty(EFFECT_FLAG_DELAY)
+	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetCondition(s.gycon)
+	e4:SetTarget(s.gytg)
+	e4:SetOperation(s.gyop)
+	c:RegisterEffect(e4)
+
 end
 s.listed_series={0x182}
 
@@ -79,10 +93,41 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(1-tp,dc)
 	if dc:IsMonster() and dc:IsRace(RACE_AQUA) and Duel.IsExistingTarget(nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) then
 		Duel.ShuffleHand(tp)
-		local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
-		Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
-		if #g>0 then
-			Duel.Destroy(g,REASON_EFFECT)
+		if Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
+			local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
+			Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
+			if #g>0 then
+				Duel.Destroy(g,REASON_EFFECT)
+			end
+		end
+	end
+end
+
+function s.gycon(e,tp,eg,ep,ev,re,r,rp)
+	return eg:IsExists(Card.IsControler,1,nil,tp)
+end
+function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local c=e:GetHandler()
+	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,1) and c:GetFlagEffect(id)==0 end
+	c:RegisterFlagEffect(id,RESET_CHAIN,0,1)
+	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,0,tp,LOCATION_DECK)
+end
+function s.gyop(e,tp,eg,ep,ev,re,r,rp)
+	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>0 and e:GetHandler():IsRelateToEffect(e) then
+		local ct=Duel.DiscardDeck(tp,1,REASON_EFFECT)
+
+		if ct==0 then return end
+		local dc=Duel.GetOperatedGroup():GetFirst()
+		Duel.ConfirmCards(1-tp,dc)
+		if c:IsSetCard(0x182) and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,1,nil) then
+			Duel.ShuffleHand(tp)
+			if Duel.SelectYesNo(tp,HINTMSG_TODECK) then
+				local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,1,1,nil)
+				if #g>0 then
+					Duel.SendtoDeck(g,nil,1,REASON_EFFECT)
+				end
+			end
 		end
 	end
 end
