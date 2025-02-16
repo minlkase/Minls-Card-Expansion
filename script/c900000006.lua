@@ -47,7 +47,7 @@ function s.initial_effect(c)
 
 	local e2 = e1:Clone()
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e2:SetProperty(EFFECT_FLAG_DELAY)
+	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
 	e2:SetCondition(function() return true end)
 	c:RegisterEffect(e2)
@@ -64,7 +64,7 @@ function s.initial_effect(c)
 	e4:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e4:SetRange(LOCATION_MZONE)
-	e4:SetCondition(s.gycon)
+	e4:SetCondition(function() return true end)
 	e4:SetTarget(s.gytg)
 	e4:SetOperation(s.gyop)
 	c:RegisterEffect(e4)
@@ -103,9 +103,6 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 
-function s.gycon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(Card.IsControler,1,nil,tp)
-end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,1) and c:GetFlagEffect(id)==0 end
