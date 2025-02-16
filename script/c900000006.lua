@@ -116,9 +116,8 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 
 		if ct==0 then return end
 		local dc=Duel.GetOperatedGroup():GetFirst()
-		Duel.ConfirmCards(1-tp,dc)
+		-- Duel.ConfirmCards(1-tp,dc)
 		if dc:IsSetCard(0x182) and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,1,nil) then
-			Duel.ShuffleHand(tp)
 			if Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 				local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,1,1,nil)
 				if #g>0 then
