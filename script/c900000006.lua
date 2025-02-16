@@ -28,10 +28,8 @@ function s.initial_effect(c)
 	e0:SetCode(EFFECT_LEAVE_FIELD_REDIRECT)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e0:SetCondition(function(e)return e:GetHandler():IsFaceup()end)
-	e0:SetValue(LOCATION_EXTRA)
+	e0:SetValue(LOCATION_DECK)
 	c:RegisterEffect(e0)
-	s.listed_series={0x182}
-
 
 	--Draw 1, Destroy 1 card on the field
 	local e1=Effect.CreateEffect(c)
@@ -58,7 +56,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 
 end
-
+s.listed_series={0x182}
 
 function s.cfilter(c,tp)
 	return c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_GRAVE+LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP)
