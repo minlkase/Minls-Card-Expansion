@@ -51,10 +51,10 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
-	c:RegisterEffect(e2)
+	--c:RegisterEffect(e2)
 	local e3=e2:Clone()
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
-	c:RegisterEffect(e3)
+	--c:RegisterEffect(e3)
 
 end
 
