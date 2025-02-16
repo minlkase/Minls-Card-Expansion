@@ -45,7 +45,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.descon)
 	e1:SetTarget(s.destg)
 	e1:SetOperation(s.desop)
-	c:RegisterEffect(e3)
+	c:RegisterEffect(e1)
 
 	local e2 = e1:Clone()
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
