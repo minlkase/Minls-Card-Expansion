@@ -47,7 +47,7 @@ function s.initial_effect(c)
 
 	local e2 = e1:Clone()
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
+	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
 	e2:SetCondition(function() return true end)
 	c:RegisterEffect(e2)
