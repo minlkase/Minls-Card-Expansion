@@ -87,7 +87,7 @@ function s.nfilter(c)
 end
 function s.condition(e)
 	tp=Duel.IsTurnPlayer(1) and 1 or 0
-	return #Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,1,0,nil)-#Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0
+	return #Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,1,0,nil)-Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0
 end
 
 function s.synchtg(e,tp,eg,ep,ev,re,r,rp,chk)
