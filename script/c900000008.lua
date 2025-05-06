@@ -91,7 +91,6 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.disoperation(e,tp,eg,ep,ev,re,r,rp)
-	tp=e:GetHandler():GetOwner()
 	if c:IsOwner(1-tp) then
 		Duel.NegateEffect(ev)
 	end
