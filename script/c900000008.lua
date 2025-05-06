@@ -38,9 +38,10 @@ function s.initial_effect(c)
 	--during the BP are negated
 	--disable
 	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetCode(EFFECT_DISABLE)
+	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetRange(LOCATION_MZONE)
+	e4:SetTargetRange(0,LOCATION_MZONE)
 	e4:SetCondition(s.condition)
 	e4:SetTargetRange(0,1)
 	e4:SetTarget(s.disable)
@@ -50,6 +51,7 @@ function s.initial_effect(c)
 	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e5:SetCode(EVENT_CHAIN_SOLVING)
 	e5:SetRange(LOCATION_SZONE)
+	e5:SetCondition(s.condition)
 	e5:SetOperation(s.disoperation)
 	c:RegisterEffect(e5)
 
@@ -88,8 +90,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.disable(e,c)
-	tp=e:GetHandler():GetOwner()
-	return (c:IsType(TYPE_EFFECT) or (c:GetOriginalType()&TYPE_EFFECT)==TYPE_EFFECT) and c:IsOwner(1-tp)
+	return true
 end
 function s.disoperation(e,tp,eg,ep,ev,re,r,rp)
 	tp=e:GetHandler():GetOwner()
