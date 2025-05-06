@@ -1,63 +1,63 @@
 --Tenpai Dragon Condra
 local s,id=GetID()
 function s.initial_effect(c)
---[[
-If this card is Normal or Special Summoned; add 1 Level 4 or lower FIRE Dragon monster from your Deck to your hand.
-You can only use this effect of "Tenpai Dragon Condra" once per turn.
-Your opponent cannot activate cards or effects durring the MP2 and EP.
-Cards and effects activated by your opponent during the BP are negated, while you control more FIRE Dragon monsters, than cards your opponent controlls.
-Once per turn during the BP, you can (QE); Immediatly after this effect resolves, Synchro Summon using cards you control.
---]]
+	--[[
+	If this card is Normal or Special Summoned; add 1 Level 4 or lower FIRE Dragon monster from your Deck to your hand.
+	You can only use this effect of "Tenpai Dragon Condra" once per turn.
+	Your opponent cannot activate cards or effects durring the MP2 and EP.
+	Cards and effects activated by your opponent during the BP are negated, while you control more FIRE Dragon monsters, than cards your opponent controlls.
+	Once per turn during the BP, you can (QE); Immediatly after this effect resolves, Synchro Summon using cards you control.
+	--]]
 
---add 1 Level 4 or lower FIRE Dragon
-local e1=Effect.CreateEffect(c)
-e1:SetDescription(aux.Stringid(id,0))
-e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
-e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-e1:SetProperty(EFFECT_FLAG_DELAY)
-e1:SetCode(EVENT_SUMMON_SUCCESS)
-e1:SetCountLimit(1,id)
-e1:SetTarget(s.thtg)
-e1:SetOperation(s.thop)
-c:RegisterEffect(e1)
-local e2=e1:Clone()
-e2:SetCode(EVENT_SPSUMMON_SUCCESS)
-c:RegisterEffect(e2)
+	--add 1 Level 4 or lower FIRE Dragon
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
+	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e1:SetProperty(EFFECT_FLAG_DELAY)
+	e1:SetCode(EVENT_SUMMON_SUCCESS)
+	e1:SetCountLimit(1,id)
+	e1:SetTarget(s.thtg)
+	e1:SetOperation(s.thop)
+	c:RegisterEffect(e1)
+	local e2=e1:Clone()
+	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
+	c:RegisterEffect(e2)
 
---cannot activate cards or effects durring the MP2 and EP
-local e3=Effect.CreateEffect(c)
-e3:SetType(EFFECT_TYPE_FIELD)
-e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-e3:SetCode(EFFECT_CANNOT_ACTIVATE)
-e3:SetRange(LOCATION_MZONE)
-e3:SetTargetRange(0,1)
-e3:SetCondition(function() return Duel.IsPhase(0x100) or Duel.IsPhase(0x200) end)
-e3:SetValue(1)
-c:RegisterEffect(e3)
+	--cannot activate cards or effects durring the MP2 and EP
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e3:SetCode(EFFECT_CANNOT_ACTIVATE)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetTargetRange(0,1)
+	e3:SetCondition(function() return Duel.IsPhase(0x100) or Duel.IsPhase(0x200) end)
+	e3:SetValue(1)
+	c:RegisterEffect(e3)
 
---during the BP are negated
-local e4=Effect.CreateEffect(c)
-e4:SetType(EFFECT_TYPE_FIELD)
-e4:SetRange(LOCATION_MZONE)
-e4:SetCondition(s.condition)
-e4:SetTargetRange(0,1)
-e4:SetTarget(s.disable)
-e4:SetCode(EFFECT_DISABLE)
-c:RegisterEffect(e4)
+	--during the BP are negated
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetCondition(s.condition)
+	e4:SetTargetRange(0,1)
+	e4:SetTarget(s.disable)
+	e4:SetCode(EFFECT_DISABLE)
+	c:RegisterEffect(e4)
 
---quick synchro
-local e5=Effect.CreateEffect(c)
-e5:SetDescription(aux.Stringid(id,1))
-e5:SetCategory(CATEGORY_SPECIAL_SUMMON)
-e5:SetType(EFFECT_TYPE_QUICK_O)
-e5:SetCode(EVENT_FREE_CHAIN)
-e5:SetRange(LOCATION_MZONE)
-e5:SetHintTiming(0,TIMING_BATTLE_START|TIMING_BATTLE_END)
-e5:SetCountLimit(1)
-e5:SetCondition(function() return Duel.IsBattlePhase() end)
-e5:SetTarget(s.synchtg)
-e5:SetOperation(s.synchop)
-c:RegisterEffect(e5)
+	--quick synchro
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(id,1))
+	e5:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e5:SetType(EFFECT_TYPE_QUICK_O)
+	e5:SetCode(EVENT_FREE_CHAIN)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetHintTiming(0,TIMING_BATTLE_START|TIMING_BATTLE_END)
+	e5:SetCountLimit(1)
+	e5:SetCondition(function() return Duel.IsBattlePhase() end)
+	e5:SetTarget(s.synchtg)
+	e5:SetOperation(s.synchop)
+	c:RegisterEffect(e5)
 
 end
 s.listed_series={SET_TENPAI_DRAGON}
