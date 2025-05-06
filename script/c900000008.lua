@@ -39,6 +39,7 @@ c:RegisterEffect(e3)
 local e4=Effect.CreateEffect(c)
 e4:SetType(EFFECT_TYPE_FIELD)
 e4:SetRange(LOCATION_MZONE)
+e4:SetCondition(s.condition)
 e4:SetTargetRange(0,1)
 e4:SetTarget(s.disable)
 e4:SetCode(EFFECT_DISABLE)
@@ -78,12 +79,14 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 
-function s.disable(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk == 0 then return #Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,0,nil)-#Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0 end
+function s.disable(e,c)
 	return c:IsType(TYPE_EFFECT) or (c:GetOriginalType()&TYPE_EFFECT)==TYPE_EFFECT
 end
 function s.nfilter(c)
 	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON)
+end
+function s.condition(e,tp)
+	return #Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,0,nil)-#Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0 end
 end
 
 function s.synchtg(e,tp,eg,ep,ev,re,r,rp,chk)
