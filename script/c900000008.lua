@@ -86,7 +86,7 @@ function s.nfilter(c)
 	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON)
 end
 function s.condition(e)
-	tp=Duel.IsTurnPlayer(1)
+	tp=Duel.IsTurnPlayer(1) and 1 or 0
 	return #Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,1,0,nil)-#Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0
 end
 
