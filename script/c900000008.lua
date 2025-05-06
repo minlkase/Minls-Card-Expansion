@@ -81,7 +81,7 @@ end
 
 function s.disable(e,c)
 	tp=e:GetHandler():GetOwner()
-	return c:IsType(TYPE_EFFECT) or (c:GetOriginalType()&TYPE_EFFECT)==TYPE_EFFECT and c:IsOwner(1-tp)
+	return (c:IsType(TYPE_EFFECT) or (c:GetOriginalType()&TYPE_EFFECT)==TYPE_EFFECT) and c:IsOwner(1-tp)
 end
 function s.nfilter(c)
 	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON)
