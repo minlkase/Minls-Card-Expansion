@@ -39,7 +39,7 @@ function s.initial_effect(c)
 	--disable
 	local e4=Effect.CreateEffect(c)
 	e4:SetCode(EFFECT_DISABLE+EFFECT_TYPE_CONTINUOUS)
-	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetTargetRange(0,LOCATION_MZONE)
 	e4:SetCondition(s.condition)
