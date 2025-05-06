@@ -42,7 +42,7 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_DISABLE)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetTargetRange(0,1)
-	e4:SetTarget(function() return true end)
+	e4:SetTarget(function() return Duel.IsBattlePhase() end)
 	e4:SetCondition(s.condition)
 	c:RegisterEffect(e4)
 
