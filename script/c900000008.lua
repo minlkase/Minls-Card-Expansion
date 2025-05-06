@@ -90,7 +90,8 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 	end
 end
-function s.disoperation(e,tp,eg,ep,ev,re,r,rp)
+function s.disoperation(e,c)
+	tp=e:GetHandler():GetOwner()
 	if c:IsOwner(1-tp) then
 		Duel.NegateEffect(ev)
 	end
