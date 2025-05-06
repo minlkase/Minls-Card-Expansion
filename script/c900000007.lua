@@ -48,12 +48,12 @@ s.listed_series={SET_SANGEN}
 
 
 function s.sfdfilter(c)
-	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sfdtarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD)
 	local ct=#g-Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.sfdilter,tp,LOCATION_DECK,0,1,nil) and ct<=0 end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.sfdfilter,tp,LOCATION_DECK,0,1,nil) and ct<=0 end
     Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.sfd(e,tp,eg,ep,ev,re,r,rp)
