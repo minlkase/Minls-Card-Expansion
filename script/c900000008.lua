@@ -93,15 +93,12 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.disoperation(e,tp,eg,ep,ev,re,r,rp)
 	tp=e:GetHandler():GetOwner()
-	if c:IsOwner(1-tp) and s.condition(e,tp) then
+	if c:IsOwner(1-tp) and #Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,1,0,nil)-Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0 and Duel.IsBattlePhase() then
 		Duel.NegateEffect(ev)
 	end
 end
 function s.nfilter(c)
 	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON)
-end
-function s.condition(e,tp)
-	return #Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,1,0,nil)-Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0 and Duel.IsBattlePhase()
 end
 
 function s.synchtg(e,tp,eg,ep,ev,re,r,rp,chk)
