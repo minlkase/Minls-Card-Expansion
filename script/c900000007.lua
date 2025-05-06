@@ -75,22 +75,22 @@ function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
     return not ((c:IsLocation(LOCATION_EXTRA) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON)) or c:IsSetCard(SET_TENPAI_DRAGON))
 end
 
-function s.bfdgfilter1(c)
+function s.bfdgfilterA(c)
 	return c:IsSetCard(SET_TENPAI_DRAGON) and c:IsMonster() and c:IsAbleToRemoveAsCost()
 end
-function s.bfdgfilter2(c)
+function s.bfdgfilterB(c)
     return c:IsSetCard(SET_SANGEN) and c:IsSpellTrap() and c:IsAbleToRemoveAsCost()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-    cond1 = Duel.IsExistingMatchingCard(s.bfdgfilter1,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.bfdgfilter2,tp,LOCATION_DECK,0,1,nil)
-    cond2 = Duel.IsExistingMatchingCard(s.bfdgfilter2,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.bfdgfilter1,tp,LOCATION_DECK,0,1,nil)
+    cond1 = Duel.IsExistingMatchingCard(s.bfdgfilterA,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.bfdgfilterB,tp,LOCATION_DECK,0,1,nil)
+    cond2 = Duel.IsExistingMatchingCard(s.bfdgfilterB,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.bfdgfilterA,tp,LOCATION_DECK,0,1,nil)
 	if chk==0 then return cond1 or cond2 end
     Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-    local g1=Duel.SelectMatchingCard(tp,function (c) return s.bfdgfilter1(c) or bfdgfilter2(c) end,tp,LOCATION_HAND,0,1,1,nil)
+    local g1=Duel.SelectMatchingCard(tp,function (c) return s.bfdgfilterA(c) or bfdgfilterB(c) end,tp,LOCATION_HAND,0,1,1,nil)
     if g1:IsSetCard(SET_TENPAI_DRAGON) then
-        f=s.bfdgfilter2
+        f=s.bfdgfilterB
     elseif g1:IsSetCard(SET_SANGEN) then
-        f=s.bfdgfilter1
+        f=s.bfdgfilterA
     end
     Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
     local g2=Duel.SelectMatchingCard(tp,f,tp,LOCATION_DECK,0,1,1,nil)
