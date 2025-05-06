@@ -54,7 +54,7 @@ end
 function s.sfdtarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetFieldGroup(tp,LOCATION_ONFIELD,0)
 	local ct=#g-Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.sfdfilter,tp,LOCATION_DECK,0,1,nil,e,tp) and ct<=0 end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.sfdfilter,tp,LOCATION_DECK,0,1,nil,e,tp) and ct<0 end
     Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.sfd(e,tp,eg,ep,ev,re,r,rp)
