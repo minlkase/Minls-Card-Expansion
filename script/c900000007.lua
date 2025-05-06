@@ -2,7 +2,7 @@
 local s,id=GetID()
 --[[
 If your opponent controlls more cards than you do: Special Summon 1 FIRE Dragon monster from your Deck, then discard 1 card,
-also you cannot Special Summon monsters for the rest of this Duel, except "Tenpai Dragon" monsters or Dragon Type monsters from the Extra Deck.
+also you cannot Special Summon monsters for the rest of this Duel, except "Tenpai Dragon" monsters or Dragon Synchro monsters.
 If this card is in your GY, you can banish 1  "Sangen" Spell/Trap and 1 "Tenpai Dragon" monster (1 from the hand and 1 from the Deck);
 add this card from your GY to your hand.
 You can only use this effect of "Sangen Ina" once per Turn.
@@ -75,7 +75,7 @@ function s.sfd(e,tp,eg,ep,ev,re,r,rp)
 
 end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
-    return not ((c:IsLocation(LOCATION_EXTRA) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON)) or c:IsSetCard(SET_TENPAI_DRAGON))
+    return not ((c:IsType(TYPE_SYNCHRO) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON)) or c:IsSetCard(SET_TENPAI_DRAGON))
 end
 
 function s.bfdgfilterA(c)
