@@ -56,7 +56,7 @@ function s.sfdtarget(e,tp,eg,ep,ev,re,r,rp,chk)
     Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.sfd(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return false end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local sc=Duel.SelectMatchingCard(tp,s.sfdilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,1,nil,e,tp):GetFirst()
 	if #g>0 and Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP)>0 then
@@ -89,7 +89,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
     local g1=Duel.SelectMatchingCard(tp,function (c) return s.bfdgfilterA(c) or bfdgfilterB(c) end,tp,LOCATION_HAND,0,1,1,nil)
     if g1:IsSetCard(SET_TENPAI_DRAGON) then
         f=s.bfdgfilterB
-    elseif g1:IsSetCard(SET_SANGEN) then
+    else g1:IsSetCard(SET_SANGEN)
         f=s.bfdgfilterA
     end
     Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
