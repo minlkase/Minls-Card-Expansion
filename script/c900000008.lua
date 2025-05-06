@@ -54,7 +54,7 @@ function s.initial_effect(c)
 	e5:SetTargetRange(0,1)
 	e5:SetOperation(s.disoperation)
 	c:RegisterEffect(e5)
-	aux.DoubleSnareValidity(c,LOCATION_MZONE)
+	--aux.DoubleSnareValidity(c,LOCATION_MZONE)
 
 	--quick synchro
 	local e6=Effect.CreateEffect(c)
