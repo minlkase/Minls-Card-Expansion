@@ -103,9 +103,8 @@ function s.nfilter(c)
 end
 function s.condition(e)
 	tp=e:GetHandler():GetOwner()
-	Debug.Message(Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,1,0,nil))
-	Debug.Message(Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD))
-	return #Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,1,0,nil)-Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0 and Duel.IsBattlePhase()
+	--#Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,1,0,nil)-Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0
+	return true and Duel.IsBattlePhase()
 end
 
 function s.synchtg(e,tp,eg,ep,ev,re,r,rp,chk)
