@@ -42,7 +42,7 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_DISABLE)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetTargetRange(0,1)
-	e4:SetTarget(function() return Duel.IsBattlePhase() end)
+	e4:SetTarget(s.condition)
 	e4:SetCondition(s.condition)
 	c:RegisterEffect(e4)
 
@@ -91,7 +91,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.disoperation(e,tp,eg,ep,ev,re,r,rp)
 	rc=re:GetHandler()
-	if rc:GetOwner()~=tp then
+	if rc:GetOwner()~=tp and s.condition(e) then
 		Duel.NegateEffect(ev)
 	end
 end
