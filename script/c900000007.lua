@@ -47,7 +47,7 @@ end
 s.listed_series={SET_SANGEN}
 
 
-function s.sfdfilter(c)
+function s.sfdfilter(c,e,tp)
 	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sfdtarget(e,tp,eg,ep,ev,re,r,rp,chk)
