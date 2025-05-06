@@ -80,14 +80,15 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.disable(e,c)
-	return c:IsType(TYPE_EFFECT) or (c:GetOriginalType()&TYPE_EFFECT)==TYPE_EFFECT
+	tp=e:GetHandler():GetOwner()
+	return c:IsType(TYPE_EFFECT) or (c:GetOriginalType()&TYPE_EFFECT)==TYPE_EFFECT and c:IsOwner(1-tp)
 end
 function s.nfilter(c)
 	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON)
 end
 function s.condition(e)
-	tp=Duel.IsTurnPlayer(1) and 1 or 0
-	return #Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,1,0,nil)-Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0
+	tp=e:GetHandler():GetOwner()
+	return #Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,1,0,nil)-Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0 and Duel.IsBattlePhase()
 end
 
 function s.synchtg(e,tp,eg,ep,ev,re,r,rp,chk)
