@@ -38,12 +38,11 @@ function s.initial_effect(c)
 	--during the BP are negated
 	--disable
 	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_FIELD)
-	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e4:SetCode(EFFECT_DISABLE)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetTargetRange(0,1)
-	e4:SetValue(s.nfilter)
+	e4:SetTarget(function() return true end)
 	e4:SetCondition(s.condition)
 	c:RegisterEffect(e4)
 
@@ -91,7 +90,6 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.disoperation(e,tp,eg,ep,ev,re,r,rp)
-	--tp=e:GetHandler():GetOwner()
 	rc=re:GetHandler()
 	if rc:GetOwner()~=tp then
 		Duel.NegateEffect(ev)
