@@ -42,11 +42,9 @@ function s.initial_effect(c)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e4:SetCode(EFFECT_DISABLE)
 	e4:SetRange(LOCATION_MZONE)
-	e4:SetRange(1)
-	e4:SetValue(1)
+	e4:SetTarget(function() return true end)
 	e4:SetTargetRange(0,1)
 	e4:SetCondition(s.condition)
-	--e4:SetTarget(s.disable)
 	c:RegisterEffect(e4)
 	--disable effect
 	local e5=Effect.CreateEffect(c)
@@ -54,9 +52,9 @@ function s.initial_effect(c)
 	e5:SetCode(EVENT_CHAIN_SOLVING)
 	e5:SetRange(LOCATION_SZONE)
 	e5:SetTargetRange(0,1)
-	--e5:SetCondition(s.condition)
 	e5:SetOperation(s.disoperation)
 	c:RegisterEffect(e5)
+	aux.DoubleSnareValidity(c,LOCATION_MZONE)
 
 	--quick synchro
 	local e6=Effect.CreateEffect(c)
@@ -91,23 +89,16 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 	end
 end
-
-function s.disable(e,c)
-	return true
-end
 function s.disoperation(e,tp,eg,ep,ev,re,r,rp)
-	tp=e:GetHandler():GetOwner()
-	if c:IsOwner(1-tp) then
+	if c:IsOwner(1-tp) and s.condition(e,tp) then
 		Duel.NegateEffect(ev)
 	end
 end
 function s.nfilter(c)
 	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON)
 end
-function s.condition(e)
-	tp=e:GetHandler():GetOwner()
-	--#Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,1,0,nil)-Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0
-	return true and Duel.IsBattlePhase()
+function s.condition(e,tp)
+	return #Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,1,0,nil)-Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0 and Duel.IsBattlePhase()
 end
 
 function s.synchtg(e,tp,eg,ep,ev,re,r,rp,chk)
