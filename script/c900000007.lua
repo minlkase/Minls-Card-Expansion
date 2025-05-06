@@ -48,7 +48,7 @@ s.listed_series={SET_SANGEN}
 
 
 function s.sfdfilter(c,e,tp)
-	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sfdtarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetFieldGroup(tp,LOCATION_ONFIELD,0)
@@ -59,7 +59,7 @@ end
 function s.sfd(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return false end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sc=Duel.SelectMatchingCard(tp,s.sfdilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,1,nil,e,tp):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,s.sfdilter,tp,LOCATION_DECK,0,1,1,nil,e,tp):GetFirst()
 	if #g>0 and Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP)>0 then
 		Duel.DiscardHand(tp,nil,1,1,REASON_EFFECT|REASON_DISCARD,nil)
 	end
