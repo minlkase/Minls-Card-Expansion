@@ -79,16 +79,12 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 
-function s.disable(e,c)
+function s.disable(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk == 0 then return #Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,0,nil)-#Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0 end
 	return c:IsType(TYPE_EFFECT) or (c:GetOriginalType()&TYPE_EFFECT)==TYPE_EFFECT
 end
 function s.nfilter(c)
 	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON)
-end
-
-function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	g=Duel.GetMatchingGroup(s.nfilter,tp,LOCATION_ONFIELD,0,nil)
-	return #g-Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0
 end
 
 function s.synchtg(e,tp,eg,ep,ev,re,r,rp,chk)
