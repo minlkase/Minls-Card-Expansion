@@ -36,28 +36,36 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 
 	--during the BP are negated
+	--disable
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetCode(EFFECT_DISABLE)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetCondition(s.condition)
 	e4:SetTargetRange(0,1)
 	e4:SetTarget(s.disable)
-	e4:SetCode(EFFECT_DISABLE)
 	c:RegisterEffect(e4)
+	--disable effect
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e5:SetCode(EVENT_CHAIN_SOLVING)
+	e5:SetRange(LOCATION_SZONE)
+	e5:SetOperation(s.disoperation)
+	c:RegisterEffect(e5)
 
 	--quick synchro
-	local e5=Effect.CreateEffect(c)
-	e5:SetDescription(aux.Stringid(id,1))
-	e5:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e5:SetType(EFFECT_TYPE_QUICK_O)
-	e5:SetCode(EVENT_FREE_CHAIN)
-	e5:SetRange(LOCATION_MZONE)
-	e5:SetHintTiming(0,TIMING_BATTLE_START|TIMING_BATTLE_END)
-	e5:SetCountLimit(1)
-	e5:SetCondition(function () return Duel.IsBattlePhase() end)
-	e5:SetTarget(s.synchtg)
-	e5:SetOperation(s.synchop)
-	c:RegisterEffect(e5)
+	local e6=Effect.CreateEffect(c)
+	e6:SetDescription(aux.Stringid(id,1))
+	e6:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e6:SetType(EFFECT_TYPE_QUICK_O)
+	e6:SetCode(EVENT_FREE_CHAIN)
+	e6:SetRange(LOCATION_MZONE)
+	e6:SetHintTiming(0,TIMING_BATTLE_START|TIMING_BATTLE_END)
+	e6:SetCountLimit(1)
+	e6:SetCondition(function () return Duel.IsBattlePhase() end)
+	e6:SetTarget(s.synchtg)
+	e6:SetOperation(s.synchop)
+	c:RegisterEffect(e6)
 
 end
 s.listed_series={SET_TENPAI_DRAGON}
@@ -82,6 +90,12 @@ end
 function s.disable(e,c)
 	tp=e:GetHandler():GetOwner()
 	return (c:IsType(TYPE_EFFECT) or (c:GetOriginalType()&TYPE_EFFECT)==TYPE_EFFECT) and c:IsOwner(1-tp)
+end
+function s.disoperation(e,tp,eg,ep,ev,re,r,rp)
+	tp=e:GetHandler():GetOwner()
+	if c:IsOwner(1-tp) then
+		Duel.NegateEffect(ev)
+	end
 end
 function s.nfilter(c)
 	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_DRAGON)
