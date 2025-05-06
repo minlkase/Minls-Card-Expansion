@@ -43,9 +43,11 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_DISABLE)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetTarget(function() return true end)
+	e4:SetValue(1)
 	e4:SetTargetRange(0,1)
 	e4:SetCondition(s.condition)
 	c:RegisterEffect(e4)
+
 	--disable effect
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
