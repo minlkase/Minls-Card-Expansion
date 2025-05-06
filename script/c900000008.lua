@@ -38,13 +38,14 @@ function s.initial_effect(c)
 	--during the BP are negated
 	--disable
 	local e4=Effect.CreateEffect(c)
-	e4:SetCode(EFFECT_DISABLE)
 	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e4:SetCode(EFFECT_DISABLE)
+	e4:SetRange(LOCATION_MZONE)
 	e4:SetRange(1)
 	e4:SetTargetRange(0,1)
-	--e4:SetCondition(s.condition)
-	e4:SetTargetRange(0,1)
-	e4:SetTarget(s.disable)
+	e4:SetCondition(s.condition)
+	--e4:SetTarget(s.disable)
 	c:RegisterEffect(e4)
 	--disable effect
 	local e5=Effect.CreateEffect(c)
