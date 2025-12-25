@@ -103,10 +103,10 @@ function s.matfilter(c)
 	return c:IsRace(RACE_REPTILE) and c:IsAbleToDeck() 
 end
 function s.extragroup(e,tp,eg,ep,ev,re,r,rp,chk)
-	return Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED,0,nil)
+	return Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_GRAVE|LOCATION_REMOVED,0,nil)
 end
 function s.extraop(mat,e,tp,eg,ep,ev,re,r,rp,tc)
-	local mat2=mat:Filter(Card.IsLocation,nil,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED)
+	local mat2=mat:Filter(Card.IsLocation,nil,LOCATION_HAND|LOCATION_MZONE|LOCATION_GRAVE|LOCATION_REMOVED)
 	mat:Sub(mat2)
 	Duel.ReleaseRitualMaterial(mat)
 	Duel.SendtoDeck(mat2,REASON_EFFECT|REASON_MATERIAL|REASON_RITUAL|REASON_RELEASE)
