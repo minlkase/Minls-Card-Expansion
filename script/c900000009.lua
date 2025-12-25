@@ -115,19 +115,19 @@ function s.tributelimit(e,tp,g,sc)
 	return #g<=2,#g>2
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local params1={lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),location=LOCATION_DECK,matfilter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),extrafil=s.extragroup,extraop=s.extraop,stage2=s.effsh,forcedselection=s.tributelimit}
+	local params1={handler=c,lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),location=LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED,matfilter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),extrafil=s.extragroup,extraop=s.extraop,stage2=s.effsh,forcedselection=s.tributelimit}
 	if chk==0 then return not Duel.HasFlagEffect(tp,id) and Ritual.Target(params1)(e,tp,eg,ep,ev,re,r,rp,0) end
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED)
 	Duel.SetOperationInfo(0,CATEGORY_RELEASE,nil,1,tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_GRAVE|LOCATION_REMOVED)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
-	local params1={lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),location=LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED,matfilter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE)}
+	local params1={handler=c,lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),location=LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED,matfilter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),extrafil=s.extragroup,extraop=s.extraop,stage2=s.effsh,forcedselection=s.tributelimit}
 	Ritual.Operation(params1)(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.effsh(e,tp,eg,ep,ev,re,r,rp)
 	local sc=e:GetLabelObject()
-	Duel.SendtoDeck(sc,REASON_EFFECT|REASON_MATERIAL|REASON_RITUAL|REASON_RELEASE)
+	Duel.SendtoDeck(sc,nil,REASON_EFFECT|REASON_MATERIAL|REASON_RITUAL|REASON_RELEASE)
 end
 
 -- e3
