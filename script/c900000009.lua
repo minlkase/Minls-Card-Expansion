@@ -106,6 +106,7 @@ function s.extragroup(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED,0,nil)
 end
 function s.extraop(mat,e,tp,eg,ep,ev,re,r,rp,tc)
+	Debug.Message("Test")
 	local mat2=mat:Filter(Card.IsLocation,nil,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED)
 	mat:Sub(mat2)
 	Duel.ReleaseRitualMaterial(mat)
