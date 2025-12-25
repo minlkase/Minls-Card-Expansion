@@ -124,7 +124,6 @@ end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local params1={lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),location=LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED,matfilter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE)}
 	Ritual.Operation(params1)(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoDeck(,REASON_EFFECT|REASON_MATERIAL|REASON_RITUAL|REASON_RELEASE)
 end
 function s.effsh(e,tp,eg,ep,ev,re,r,rp)
 	local sc=e:GetLabelObject()
