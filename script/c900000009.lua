@@ -122,7 +122,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_RELEASE,nil,1,tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_GRAVE|LOCATION_REMOVED)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
-	local params1={handler=c,lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),location=LOCATION_HAND|LOCATION_MZONE|LOCATION_GRAVE|LOCATION_REMOVED,matfilter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),extrafil=s.extragroup,extraop=s.extraop,stage2=s.effsh,forcedselection=s.tributelimit}
+	local params1={handler=c,lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),location=LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED,matfilter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),extrafil=s.extragroup,extraop=s.extraop,stage2=s.effsh,forcedselection=s.tributelimit}
 	Ritual.Operation(params1)(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.effsh(e,tp,eg,ep,ev,re,r,rp)
