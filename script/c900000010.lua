@@ -103,6 +103,7 @@ end
 function s.effcheck(op)
 	if op==1 then
 		return function(e,tp,eg,ep,ev,re,r,rp)
+			Debug.Message("eval op 1")
 			return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 		end
 	end
