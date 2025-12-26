@@ -109,6 +109,7 @@ function s.extraop(mat,e,tp,eg,ep,ev,re,r,rp,tc)
 	local mat2=mat:Filter(Card.IsLocation,nil,LOCATION_HAND|LOCATION_MZONE|LOCATION_GRAVE|LOCATION_REMOVED)
 	mat:Sub(mat2)
 	-- Duel.ReleaseRitualMaterial(mat)
+	Duel.SendtoDeck(mat,nil,SEQ_DECKSHUFFLE,REASON_EFFECT|REASON_MATERIAL|REASON_RITUAL)
 	Duel.SendtoDeck(mat2,nil,SEQ_DECKSHUFFLE,REASON_EFFECT|REASON_MATERIAL|REASON_RITUAL)
 	-- Duel.SendtoDeck(mat,nil,SEQ_DECKSHUFFLE,REASON_EFFECT|REASON_MATERIAL|REASON_RITUAL)
 end
