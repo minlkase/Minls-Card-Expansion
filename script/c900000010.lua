@@ -130,7 +130,7 @@ function s.extraop(mat,e,tp,eg,ep,ev,re,r,rp,tc)
 	local mat2=mat:Filter(Card.IsLocation,nil,LOCATION_DECK|LOCATION_HAND|LOCATION_MZONE)
 	mat:Sub(mat2)
 	Duel.ReleaseRitualMaterial(mat)
-	Duel.SendtoGrave(mat2,nil,SEQ_DECKSHUFFLE,REASON_EFFECT|REASON_MATERIAL|REASON_RITUAL)
+	Duel.SendtoGrave(mat2,REASON_EFFECT|REASON_MATERIAL|REASON_RITUAL|REASON_RELEASE)
 end
 function s.tributelimit(e,tp,g,sc)
 	return #g<=2,#g>2

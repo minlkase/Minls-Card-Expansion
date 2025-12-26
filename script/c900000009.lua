@@ -100,7 +100,7 @@ end
 -- e2
 
 function s.matfilter(c)
-	return c:IsRace(RACE_REPTILE) and c:IsAbleToDeck() 
+	return c:IsRace(RACE_REPTILE) and c:IsAbleToDeck() and c:HasLevel()
 end
 function s.extragroup(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_GRAVE|LOCATION_REMOVED,0,nil)
