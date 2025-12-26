@@ -101,10 +101,9 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.effcheck(op)
-	Debug.Message("effcheck")
 	if op==1 then
 		return function(e,tp,eg,ep,ev,re,r,rp)
-			Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
+			return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 		end
 	end
 	if op==2 then
