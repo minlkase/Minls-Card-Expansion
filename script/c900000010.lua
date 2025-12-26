@@ -103,7 +103,7 @@ end
 function s.effcheck(op)
 	if op==1 then
 		return function(e,tp,eg,ep,ev,re,r,rp)
-			return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
+			return not Duel.HasFlagEffect(tp,id) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 		end
 	end
 	if op==2 then
@@ -137,12 +137,6 @@ function s.tributelimit(e,tp,g,sc)
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local op=e:GetLabel()
-	Debug.Message("op: "..op)
-	local params1={handler=c,lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),location=LOCATION_HAND,matfilter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),extrafil=s.extragroup,extraop=s.extraop,forcedselection=s.tributelimit}
-	local params2={handler=c,lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),location=LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED,matfilter=aux.FilterBoolFunction(Card.IsRace,RACE_REPTILE),extrafil=s.extragroup,extraop=s.extraop,forcedselection=s.tributelimit}
-	local b1 = Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
-	local b2 = Ritual.Target(params1)(e,tp,eg,ep,ev,re,r,rp,0)
-	local b3 = Ritual.Target(params2)(e,tp,eg,ep,ev,re,r,rp,0)
 	if chk==0 then return not Duel.HasFlagEffect(tp,id) end
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
 	if op==1 then
