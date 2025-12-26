@@ -103,8 +103,6 @@ end
 function s.effcheck(op)
 	if op==1 then
 		return function(e,tp,eg,ep,ev,re,r,rp)
-			Debug.Message("eval op 1:")
-			Debug.Message(Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil))
 			return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 		end
 	end
@@ -144,6 +142,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return (op==1 and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)) or (op==2 and not Duel.HasFlagEffect(tp,id) and Ritual.Target(params1)(e,tp,eg,ep,ev,re,r,rp,0)) or (op==3 and not Duel.HasFlagEffect(tp,id) and Ritual.Target(params2)(e,tp,eg,ep,ev,re,r,rp,0)) end
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
 	if op==1 then
+		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	end
 	if op==2 then
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
