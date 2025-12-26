@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCountLimit(1,id)
+	e1:SetCountLimit(1,{id,0})
 	e1:SetCost(s.spcost)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
@@ -101,6 +101,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.effcheck(op)
+	Debug.Message("effcheck")
 	if op==1 then
 		return function(e,tp,eg,ep,ev,re,r,rp)
 			Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
